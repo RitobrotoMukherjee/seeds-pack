@@ -2,12 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Billing extends Model
 {
-    use HasFactory;
     
     /**
      * The attributes that are mass assignable.
@@ -22,9 +20,7 @@ class Billing extends Model
         'net_amount',
         'billing_date',
         'transporter_name',
-        'destination',
-        'dispatched_date',
-        'lr_no'
+        'dispatched_date'
     ];
     
     public function customer(){

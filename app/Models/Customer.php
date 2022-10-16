@@ -2,13 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Customer extends Model
 {
-    use HasFactory;
-    
     /**
      * The attributes that are mass assignable.
      *
@@ -17,10 +14,7 @@ class Customer extends Model
     protected $fillable = [
         'id',
         'name',
-        'mobile',
-        'address',
-        'city_village',
-        'pincode'
+        'city_village'
     ];
     
     public function payment() {

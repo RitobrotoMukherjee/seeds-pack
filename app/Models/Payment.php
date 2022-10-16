@@ -19,6 +19,7 @@ class Payment extends Model
         'customer_id',
         'payment_amount',
         'payment_date',
+        'payment_mode'
     ];
     
     public function customer(){
