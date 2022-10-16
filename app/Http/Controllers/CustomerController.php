@@ -54,8 +54,7 @@ class CustomerController extends Controller
                 $paid_amount = $customer->payment->sum('payment_amount');
             }
             $nestedData['name'] = ucwords($customer->name);
-            $nestedData['mobile'] = $customer->mobile;
-            $nestedData['address'] = $customer->address.", ".$customer->city_village.", ".$customer->pincode;
+            $nestedData['address'] = $customer->city_village.", ".$customer->pincode;
             $nestedData['outstanding_amount'] = $billing_amount - $paid_amount;
             $result[] = $nestedData;
         }

@@ -46,16 +46,22 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="payment_amount">Payment Amount</label>
                                             <input type="text" inputmode="decimal" class="form-control" id="payment_amount" placeholder="Payment Amount" name="payment[payment_amount]" required>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="payment_date">Payment Date</label>
                                             <input type="text" class="form-control" id="payment_date" placeholder="Payment Date" name="payment[payment_date]"  data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy-mm-dd" data-mask required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="payment_mode">Payment Mode</label>
+                                            <input type="text" class="form-control" id="payment_mode" placeholder="Payment Mode" name="payment[payment_mode]" required>
                                         </div>
                                     </div>
                                     
@@ -118,6 +124,10 @@
                     },
                     "payment[payment_date]":{
                         required:true
+                    },
+                    "payment[payment_mode]":{
+                        required:true,
+                        maxlength: 50
                     }
                 }
             });

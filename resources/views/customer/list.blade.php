@@ -23,7 +23,6 @@
                                 <thead>
                                     <tr>
                                         <th>Customer Name</th>
-                                        <th>Customer mobile</th>
                                         <th>Address</th>
                                         <th>Outstanding Amount</th>
                                     </tr>
@@ -64,7 +63,6 @@
                 },
                 "columns": [
                     { "data": "name" },
-                    { "data": "mobile" },
                     { "data": "address" },
                     { "data": "outstanding_amount" }
                 ]

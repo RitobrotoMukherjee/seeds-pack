@@ -29,6 +29,7 @@
                                     <tr>
                                         <th>Customer Name</th>
                                         <th>Payment Amount</th>
+                                        <th>Payment Mode</th>
                                         <th>Payment Date</th>
                                     </tr>
                                 </thead>
@@ -69,6 +70,7 @@
                 "columns": [
                     { "data": "customer_name" },
                     { "data": "payment_amount" },
+                    { "data": "payment_mode" },
                     { "data": "payment_date" }
                 ]
             }).buttons().container().appendTo('#payment-list_wrapper .col-md-6:eq(0)');

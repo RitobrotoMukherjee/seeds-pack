@@ -76,10 +76,6 @@
                                             <dd>{{ $details['payment_data']['customer']['name'] }}</dd>
                                         </div>
                                         <div class="col-md-6">
-                                            <dt>Mobile</dt>
-                                            <dd>{{ $details['payment_data']['customer']['mobile'] }}</dd>
-                                        </div>
-                                        <div class="col-md-6">
                                             <dt>Address</dt>
                                             <dd>{{ $details['payment_data']['customer']['address'] }}</dd>
                                         </div>

@@ -66,7 +66,9 @@ class PaymentController extends Controller
     protected function validator(array $payment)
     {
         $validator = [
-            'customer_id' => 'required|integer','payment_amount' => 'required|numeric|min:0',
+            'customer_id' => 'required|integer',
+            'payment_amount' => 'required|numeric|min:0',
+            'payment_mode' => 'required|string|max:50',
             'payment_date' => 'required|date'
         ];
         
@@ -86,6 +88,7 @@ class PaymentController extends Controller
 
                 $nestedData['customer_name'] = ucwords($payment->customer->name);
                 $nestedData['payment_amount'] = $payment->payment_amount;
+                $nestedData['payment_mode'] = $payment->payment_mode;
                 $nestedData['payment_date'] = date('d-m-Y', strtotime($payment->payment_date));
                 $result[] = $nestedData;
 
