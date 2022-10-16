@@ -25,10 +25,10 @@ class BillingService {
     
     public function customerUpsert($customer) {
         return Customer::updateOrCreate(
-                ['mobile' => $customer['mobile']],
+                ['id' => $customer['id']],
                 [
-                    'name' => $customer['name'], 'mobile' => $customer['mobile'], 'address' => $customer['address'],
-                    'city_village' => $customer['city_village'],'pincode' => $customer['pincode'],
+                    'name' => $customer['name'],
+                    'city_village' => $customer['city_village'],
                 ]
             );
     }
@@ -36,10 +36,12 @@ class BillingService {
     public function billInsert($invoicein, $cid) {
         return Billing::Create(
                 [
-                    'customer_id' => $cid, 'invoice_number' => $invoicein['invoice_number'], 'hamali_charges' => $invoicein['hamali_charges'], 
-                    'net_amount' => $invoicein['net_amount'], 'billing_date' => date('Y-m-d', strtotime($invoicein['billing_date'])), 
-                    'transporter_name' => $invoicein['transporter_name'], 'destination' => $invoicein['destination'], 
-                    'dispatched_date' => date('Y-m-d', strtotime($invoicein['dispatched_date'])), 'lr_no' => $invoicein['lr_no']
+                    'customer_id' => $cid, 'invoice_number' => $invoicein['invoice_number'], 
+                    'hamali_charges' => $invoicein['hamali_charges'], 
+                    'net_amount' => $invoicein['net_amount'], 
+                    'billing_date' => date('Y-m-d', strtotime($invoicein['billing_date'])), 
+                    'transporter_name' => $invoicein['transporter_name'], 
+                    'dispatched_date' => date('Y-m-d', strtotime($invoicein['dispatched_date']))
                 ]
         );
     }
@@ -79,7 +81,8 @@ class BillingService {
     public function setInvoiceProductDetails(object $product):array{
         $productTypes = ApplicationUtils::getProductType();
         return [
-            'product_name' => isset($product->product) ? $product->product->name : "Product Deleted", 'product_type' => isset($product->product) ? $productTypes[$product->product->type] : "",
+            'product_name' => isset($product->product) ? $product->product->name : "Product Deleted", 
+            'product_type' => isset($product->product) ? $productTypes[$product->product->type] : "",
             'product_quantity' => $product->quantity, 'unit_price' => $product->unit_price
         ];
     }

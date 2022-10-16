@@ -27,13 +27,11 @@
                             <table id="billing-list" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th>LR No</th>
                                         <th>Invoice No</th>
                                         <th>Customer</th>
                                         <th>Hamali Charges</th>
                                         <th>Net Amount</th>
                                         <th>Transporter</th>
-                                        <th>Destination</th>
                                         <th>Billing Date</th>
                                         <th>Dispatch Date</th>
                                         <th>Actions</th>
@@ -74,13 +72,11 @@
                      "type": "POST"
                 },
                 "columns": [
-                    { "data": "lr_no" },
                     { "data": "invoice_number" },
                     { "data": "customer_name" },
                     { "data": "hamali_charges" },
                     { "data": "net_amount" },
                     { "data": "transporter" },
-                    { "data": "destination" },
                     { "data": "billing_date" },
                     { "data": "dispatch_date" },
                     { "data": "options" }
