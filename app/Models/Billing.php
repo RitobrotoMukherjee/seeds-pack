@@ -1,0 +1,37 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Billing extends Model
+{
+    use HasFactory;
+    
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var string[]
+     */
+    protected $fillable = [
+        'id',
+        'customer_id',
+        'invoice_number',
+        'hamali_charges',
+        'net_amount',
+        'billing_date',
+        'transporter_name',
+        'destination',
+        'dispatched_date',
+        'lr_no'
+    ];
+    
+    public function customer(){
+        return $this->belongsTo(Customer::class);
+    }
+    
+    public function invoice_detail(){
+        return $this->hasMany(InvoiceDetail::class);
+    }
+}
