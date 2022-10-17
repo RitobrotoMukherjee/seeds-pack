@@ -185,13 +185,13 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="hamali_charges">Hamali Charges</label>
-                                            <input type="text" inputmode="decimal" class="form-control" id="hamali_charges" placeholder="Hamali Charges" name="bill[hamali_charges]" required>
+                                            <input type="text" inputmode="decimal" class="form-control" id="hamali_charges" placeholder="Hamali Charges" data-prev-value="0" name="bill[hamali_charges]" onchange="updateHamaliCharge(this)" required>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="net_amount">Net Amount</label>
-                                            <input type="text" inputmode="decimal" class="form-control" id="net_amount" placeholder="Net Amount" name="bill[net_amount]" required>
+                                            <input type="text" inputmode="decimal" class="form-control" id="net_amount" placeholder="Net Amount" name="bill[net_amount]" value="0" required>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -236,6 +236,8 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.0/dist/jquery.validate.js"></script>
     <script src="{{ config('app.asset_url') }}/vendor/adminlte/plugins/select2/js/select2.min.js"></script>
     <script type="text/javascript">
+        const NET_AMOUNT = document.getElementById('net_amount');
+
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -249,7 +251,6 @@
                     type: 'POST',  // http method
                     data: {product_id: id},
                     success: function (data, status, xhr) {
-                        console.log(data);
                         document.getElementById("product-type-"+data.type).setAttribute("selected","");
                         document.getElementById("available").value = data.available  + " Kgs";
                         document.getElementById("sale_price_per_kg").value = data.sale_price_per_kg;
@@ -264,12 +265,18 @@
                 toastr.error("Select Product First");
             }
         }
+
+        const updateHamaliCharge = ($this) => {
+            const { prevValue } = $this.dataset
+            NET_AMOUNT.value = parseFloat(NET_AMOUNT.value) - prevValue + parseFloat($this.value);
+            $this.dataset.prevValue = $this.value;
+        }
         
         function addProduct(){
-            let table = document.getElementById("product_table");
-            let product_id = parseInt(document.getElementById("product_select").value);
-            let unit_price = document.getElementById("sale_price_per_kg").value;
-            let quantity = parseFloat(document.getElementById("quantity").value);
+            const table = document.getElementById("product_table");
+            const product_id = parseInt(document.getElementById("product_select").value);
+            const unit_price = document.getElementById("sale_price_per_kg").value;
+            const quantity = parseFloat(document.getElementById("quantity").value);
             
             if(isNaN(product_id) || product_id === 0){
                 return toastr.error("Select A Product First");
@@ -277,32 +284,34 @@
             if(isNaN(quantity) || quantity === 0){
                 return toastr.error("Product Quantity Cannot Be Zero");
             }
-            let product = {};
-            product['product_id'] = product_id; product['unit_price'] = unit_price; 
-            product['quantity'] = quantity;
+
+            let product = {
+                product_id, unit_price, quantity
+            };
+
             $.ajax("{{ route('ajax.product.cart') }}", {
                 type: 'POST',
-                data: {product: product},
+                data: { product },
                 success: function (data, status, xhr) {
-                    console.log(data);
-                    document.getElementById("product_data").value = JSON.stringify(data.products);
+                    const { products, net_amount } = data;
+                    document.getElementById("product_data").value = JSON.stringify(products);
                     let template = ``;
-                    for(var key in data.products){
+                    for(var key in products){
                         template += 
                                 `
                             <tr id="product_table_${key}">
-                                <td>${data.products[key].product_name}</td>
-                                <td>${data.products[key].available} Kgs</td>
-                                <td>${data.products[key].quantity_need} Kgs</td>
-                                <td>${data.products[key].unit_price}</td>
-                                <td>${data.products[key].unit_price * data.products[key].quantity_need}</td>
+                                <td>${products[key].product_name}</td>
+                                <td>${products[key].available} Kgs</td>
+                                <td>${products[key].quantity_need} Kgs</td>
+                                <td>${products[key].unit_price}</td>
+                                <td>${products[key].unit_price * products[key].quantity_need}</td>
                             </tr>
                             `;
                     }
                     table.innerHTML =  template;
+                    NET_AMOUNT.value = parseFloat(NET_AMOUNT.value) + parseFloat(net_amount);
                 },
                 error: function (jqXhr, textStatus, errorMessage) {
-                    console.log(textStatus);
                     toastr.error(errorMessage);
                 }
             });
@@ -322,7 +331,6 @@
                         document.getElementById("paid_date").value = (data.last_paid_date) ? data.last_paid_date : null;
                     },
                     error: function (jqXhr, textStatus, errorMessage) {
-                        console.log(textStatus);
                         toastr.error(errorMessage);
                     }
                 });

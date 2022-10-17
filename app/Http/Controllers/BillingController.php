@@ -52,10 +52,10 @@ class BillingController extends Controller
     
     public function printBill($id){
         $data = $this->get_invoice_data($id);
-//        dd($data);
+    //    dd($data);
         $pdf = PDF::loadView('billing.orderPDF', $data);
     
-        return $pdf->stream($data['invoice_number'].'.pdf', ["Attachment" => false]);
+        return $pdf->stream($data['invoice']['invoice_number'].'.pdf', ["Attachment" => false]);
     }
     protected function get_invoice_data($id) {
         $invoice = $this->service->getBillById($id);
