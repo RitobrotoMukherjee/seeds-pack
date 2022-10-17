@@ -55,24 +55,21 @@ class BillingController extends Controller
 //        dd($data);
         $pdf = PDF::loadView('billing.orderPDF', $data);
     
-        return $pdf->stream($data['invoice']['lr_no'].'.pdf', ["Attachment" => false]);
+        return $pdf->stream($data['invoice_number'].'.pdf', ["Attachment" => false]);
     }
     protected function get_invoice_data($id) {
         $invoice = $this->service->getBillById($id);
 //        dd($invoice->toArray());
         $data['invoice'] = [
             'date' => date('d-m-Y H:i', strtotime($invoice->created_at)),
-            'lr_no' => $invoice->lr_no,
             'invoice_number' => $invoice->invoice_number,
             'hamali_charges' => $invoice->hamali_charges,
             'net_amount' => $invoice->net_amount,
             'transporter_name' => ucwords($invoice->transporter_name),
-            'destination' => ucwords($invoice->destination),
             'billing_date' => date('d-m-Y', strtotime($invoice->billing_date)),
             'dispatched_date' => date('d-m-Y', strtotime($invoice->dispatched_date)),
             'customer_name' => ucwords($invoice->customer->name),
-            'customer_mobile' => $invoice->customer->mobile,
-            'customer_address' => ucwords($invoice->customer->address),
+            'customer_address' => ucwords($invoice->customer->city_village),
             'customer_outstanding_amount' => $invoice->customer->outstanding_amount,
             'customer_last_paid_amount' => $invoice->customer->last_paid_amount,
             'customer_last_payment_date' => $invoice->customer->last_paid_date,
@@ -118,13 +115,11 @@ class BillingController extends Controller
                 $view = route('bill.print',$billing->id);
                 $delete = route('bill.delete',$billing->id);
 
-                $nestedData['lr_no'] = $billing->lr_no;
                 $nestedData['invoice_number'] = $billing->invoice_number;
                 $nestedData['customer_name'] = $billing->customer->name;
                 $nestedData['hamali_charges'] = $billing->hamali_charges;
                 $nestedData['net_amount'] = $billing->net_amount;
                 $nestedData['transporter'] = $billing->transporter_name;
-                $nestedData['destination'] = $billing->destination;
                 $nestedData['billing_date'] = date('d-m-Y',  strtotime($billing->billing_date));
                 $nestedData['dispatch_date'] = date('d-m-Y',  strtotime($billing->dispatched_date));
                 $nestedData['options'] = "<a class='btn btn-xs btn-default text-primary mx-1 shadow' title='Print Bill' href='{$view}' target='_blank'><i class='fa fa-lg fa-fw fa-eye'></i></a>"

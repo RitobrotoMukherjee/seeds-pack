@@ -55,26 +55,8 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="customer_mobile">Customer Mobile</label>
-                                            <input type="text" class="form-control" id="customer_mobile" placeholder="Customer Mobile" name="customer[mobile]" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="customer_address">Customer Address</label>
-                                            <input type="text" class="form-control" id="customer_address" placeholder="Customer Address" name="customer[address]" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
                                             <label for="customer_city_village">Customer City/Village</label>
                                             <input type="text" class="form-control" id="customer_city_village" placeholder="Customer City Village" name="customer[city_village]" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="customer_pin">Customer Pincode</label>
-                                            <input type="text" class="form-control" id="customer_pin" inputmode="decimal" placeholder="Customer Pin Code" name="customer[pincode]" required>
                                         </div>
                                     </div>
                                 </div>
@@ -121,7 +103,7 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="product_type">Product Type</label>
                                             <select class="form-control " id="product_type" style="pointer-events: none;" >
@@ -132,13 +114,13 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="available">Availability Stock in Kgs(Auto Fill)</label>
                                             <input type="text" class="form-control" id="available" placeholder="Available in Kgs" value="0" readonly>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="sale_price_per_kg">Sale Price Per Kgs(Auto Fill)</label>
                                             <input type="text" class="form-control" id="sale_price_per_kg" placeholder="Sale Price Per Kgs" value="0" readonly>
@@ -150,10 +132,10 @@
                                             <input type="text" inputmode="decimal" class="form-control" id="quantity" name="ajax[quantity]" placeholder="Quantity In Kgs" required >
                                         </div>
                                     </div>
-                                    <div class="col-md-6 text-center">
+                                    <div class="col-md-12 text-center mt-5">
                                         <div class="form-group">
-                                            <label >---</label>
-                                            <button type="button" class="btn btn-warning btn-block" onclick="addProduct()">Add Product To bill</button>
+                                            <label ></label>
+                                            <button type="button" class="btn btn-lg btn-warning" onclick="addProduct()">Add Product To bill</button>
                                         </div>
                                     </div>
                                 </div>
@@ -188,22 +170,16 @@
                             </div>
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="billing_date">Billing Date</label>
                                             <input type="text" class="form-control" id="billing_date" placeholder="Billing Date" name="bill[billing_date]"  data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy-mm-dd" data-mask required>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="invoice_number">Invoice No</label>
                                             <input type="text" class="form-control" id="invoice_number" placeholder="Invoice No." name="bill[invoice_number]" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="lr_no">Lr No</label>
-                                            <input type="text" class="form-control" id="lr_no" placeholder="LR No." name="bill[lr_no]" required>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -218,19 +194,13 @@
                                             <input type="text" inputmode="decimal" class="form-control" id="net_amount" placeholder="Net Amount" name="bill[net_amount]" required>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="transporter_name">Transporter Name</label>
                                             <input type="text" class="form-control" id="transporter_name" placeholder="Transporter Name" name="bill[transporter_name]" required>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="destination">Destination</label>
-                                            <input type="text" class="form-control" id="destination" placeholder="Destination" name="bill[destination]" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="dispatched_date">Dispatch Date</label>
                                             <input type="text" class="form-control" id="dispatched_date" placeholder="Dispatch Date" name="bill[dispatched_date]"  data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy-mm-dd" data-mask required>
@@ -297,14 +267,14 @@
         
         function addProduct(){
             let table = document.getElementById("product_table");
-            let product_id = document.getElementById("product_select").value;
+            let product_id = parseInt(document.getElementById("product_select").value);
             let unit_price = document.getElementById("sale_price_per_kg").value;
-            let quantity = document.getElementById("quantity").value;
+            let quantity = parseFloat(document.getElementById("quantity").value);
             
-            if(isNaN(parseInt(product_id)) || parseInt(product_id) === 0){
+            if(isNaN(product_id) || product_id === 0){
                 return toastr.error("Select A Product First");
             }
-            if(isNaN(parseFloat(quantity)) || parseFloat(quantity) === 0){
+            if(isNaN(quantity) || quantity === 0){
                 return toastr.error("Product Quantity Cannot Be Zero");
             }
             let product = {};
@@ -345,15 +315,11 @@
                     type: 'POST',  // http method
                     data: {customer_id: id},
                     success: function (data, status, xhr) {
-                        console.log(data);
                         document.getElementById("customer_name").value = data.name;
-                        document.getElementById("customer_mobile").value = data.mobile;
-                        document.getElementById("customer_address").value = data.address;
                         document.getElementById("customer_city_village").value = data.city_village;
-                        document.getElementById("customer_pin").value = data.pincode;
                         document.getElementById("outstanding_amount").value = data.outstanding_amount;
-                        document.getElementById("paid_amount").value = (typeof data.last_paid_amount !== 'undefined') ? data.last_paid_amount : 0;
-                        document.getElementById("paid_date").value = (typeof data.last_paid_date !== 'undefined') ? data.last_paid_date : null;
+                        document.getElementById("paid_amount").value = (data.last_paid_amount) ? data.last_paid_amount : 0 ;
+                        document.getElementById("paid_date").value = (data.last_paid_date) ? data.last_paid_date : null;
                     },
                     error: function (jqXhr, textStatus, errorMessage) {
                         console.log(textStatus);
@@ -380,16 +346,9 @@
                     "customer[name]": {
                         required: true,
                     },
-                    "customer[mobile]":{
+                    "customer[city_village]":{
                         required:true,
-                        number: true
-                    },
-                    "customer[address]":{
-                        required:true
-                    },
-                    "customer[pincode]":{
-                        required:true,
-                        number: true
+                        maxlength: 50
                     },
                     "bill[net_amount]":{
                         required:true,

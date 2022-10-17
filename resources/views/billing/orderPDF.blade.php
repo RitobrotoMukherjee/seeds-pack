@@ -24,7 +24,6 @@
                 <div class="col-xs-4">
                     <h4><u>Destination Address</u></h4>
                     <h6>{{ $invoice['customer_name'] }}</h6>
-                    <h6><a href="tel:91{{ $invoice['customer_mobile'] }}">+91 {{ $invoice['customer_mobile'] }}</a></h6>
                     <h6>{{ $invoice['customer_address'] }}</h6>
                 </div>
                 <div class="col-xs-4 ">
@@ -123,20 +122,10 @@
             </div>
             <hr>
             <div class="row">
-                <div class="col-xs-4 ">
+                <div class="col-xs-9 text-center ">
                     <h5>
                         <p>Transporter: {{ $invoice['transporter_name'] }}</p>
                     </h5>
-                </div>
-                <div class="col-xs-4 ">
-                    <h5>
-                        <p>Destination: {{ $invoice['destination'] }}</p>
-                    </h5>
-                </div>
-                <div class="col-xs-4 ">
-                    <h4>
-                        <p>LR No.: {{ $invoice['lr_no'] }}</p>
-                    </h4>
                 </div>
             </div>
             <hr>
