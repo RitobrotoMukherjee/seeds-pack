@@ -36,8 +36,7 @@ class BillingService {
     public function billInsert($invoicein, $cid) {
         return Billing::Create(
                 [
-                    'customer_id' => $cid, 'invoice_number' => $invoicein['invoice_number'], 
-                    'hamali_charges' => $invoicein['hamali_charges'], 
+                    'customer_id' => $cid, 'invoice_number' => $invoicein['invoice_number'],
                     'net_amount' => $invoicein['net_amount'], 
                     'billing_date' => date('Y-m-d', strtotime($invoicein['billing_date'])), 
                     'transporter_name' => $invoicein['transporter_name'], 

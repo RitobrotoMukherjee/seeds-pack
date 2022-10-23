@@ -16,7 +16,6 @@ class Billing extends Model
         'id',
         'customer_id',
         'invoice_number',
-        'hamali_charges',
         'net_amount',
         'billing_date',
         'transporter_name',
@@ -29,5 +28,9 @@ class Billing extends Model
     
     public function invoice_detail(){
         return $this->hasMany(InvoiceDetail::class);
+    }
+
+    public function return_product() {
+        return $this->hasOne(ReturnProduct::class);
     }
 }

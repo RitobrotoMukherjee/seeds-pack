@@ -63,7 +63,6 @@ class BillingController extends Controller
         $data['invoice'] = [
             'date' => date('d-m-Y H:i', strtotime($invoice->created_at)),
             'invoice_number' => $invoice->invoice_number,
-            'hamali_charges' => $invoice->hamali_charges,
             'net_amount' => $invoice->net_amount,
             'transporter_name' => ucwords($invoice->transporter_name),
             'billing_date' => date('d-m-Y', strtotime($invoice->billing_date)),
@@ -117,7 +116,6 @@ class BillingController extends Controller
 
                 $nestedData['invoice_number'] = $billing->invoice_number;
                 $nestedData['customer_name'] = $billing->customer->name;
-                $nestedData['hamali_charges'] = $billing->hamali_charges;
                 $nestedData['net_amount'] = $billing->net_amount;
                 $nestedData['transporter'] = $billing->transporter_name;
                 $nestedData['billing_date'] = date('d-m-Y',  strtotime($billing->billing_date));
