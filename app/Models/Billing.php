@@ -19,7 +19,8 @@ class Billing extends Model
         'net_amount',
         'billing_date',
         'transporter_name',
-        'dispatched_date'
+        'dispatched_date',
+        'return_status'
     ];
     
     public function customer(){
