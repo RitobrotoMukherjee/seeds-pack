@@ -135,14 +135,6 @@
                         <p>Dispatched Date: {{ $invoice['dispatched_date'] }}</p>
                     </h5>
                 </div>
-            </div>
-            <hr>
-            <div class="row">
-                <div class="col-xs-6 ">
-                    <h4>
-                        <p>HAMALI CHARGES: {{ number_format((float)$invoice['hamali_charges'], 2, '.','') }}</p>
-                    </h4>
-                </div>
                 <div class="col-xs-6 ">
                     <h4>
                         <p>NET AMOUNT: {{ number_format((float)$invoice['net_amount'], 2, '.','') }}</p>

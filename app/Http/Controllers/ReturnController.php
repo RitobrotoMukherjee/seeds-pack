@@ -14,6 +14,12 @@ class ReturnController extends Controller
         parent::__construct();
         $this->service = new ReturnService();   
     }
+    
+    public function viewReturn(int $billing_id) {
+        $this->data['today'] = $this->today;
+        $this->data['billing_deatils'] = $this->service->viewReturn($billing_id);
+        return view('return.generate', $this->data);
+    }
 
     public function returnInvoice(ReturnRequest $req) {
         $inputs = $req->validated();

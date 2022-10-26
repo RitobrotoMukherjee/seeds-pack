@@ -184,12 +184,6 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="hamali_charges">Hamali Charges</label>
-                                            <input type="text" inputmode="decimal" class="form-control" id="hamali_charges" placeholder="Hamali Charges" data-prev-value="0" name="bill[hamali_charges]" onchange="updateHamaliCharge(this)" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
                                             <label for="net_amount">Net Amount</label>
                                             <input type="text" inputmode="decimal" class="form-control" id="net_amount" placeholder="Net Amount" name="bill[net_amount]" value="0" required>
                                         </div>
@@ -264,12 +258,6 @@
             }else{
                 toastr.error("Select Product First");
             }
-        }
-
-        const updateHamaliCharge = ($this) => {
-            const { prevValue } = $this.dataset
-            NET_AMOUNT.value = parseFloat(NET_AMOUNT.value) - prevValue + parseFloat($this.value);
-            $this.dataset.prevValue = $this.value;
         }
         
         function addProduct(){

@@ -94,10 +94,9 @@ class BillingController extends Controller
         if(!empty($request->input('search.value'))){ 
             $search = $request->input('search.value'); 
             
-            $qry->where('lr_no','LIKE',"%{$search}%")->orWhere('invoice_number','LIKE',"%{$search}%");
+            $qry->where('invoice_number','LIKE',"%{$search}%");
             
-            $totalFiltered = Billing::where('lr_no','LIKE',"%{$search}%")
-                    ->orWhere('invoice_number','LIKE',"%{$search}%")->count();
+            $totalFiltered = Billing::where('invoice_number','LIKE',"%{$search}%")->count();
         }
         $billings = $qry->offset($start)->limit($limit)->orderBy('id','DESC')->get();
         if(!empty($billings)){
@@ -113,6 +112,7 @@ class BillingController extends Controller
             {
                 $view = route('bill.print',$billing->id);
                 $delete = route('bill.delete',$billing->id);
+                $return = route('return.view', $billing->id);
 
                 $nestedData['invoice_number'] = $billing->invoice_number;
                 $nestedData['customer_name'] = $billing->customer->name;
@@ -121,7 +121,8 @@ class BillingController extends Controller
                 $nestedData['billing_date'] = date('d-m-Y',  strtotime($billing->billing_date));
                 $nestedData['dispatch_date'] = date('d-m-Y',  strtotime($billing->dispatched_date));
                 $nestedData['options'] = "<a class='btn btn-xs btn-default text-primary mx-1 shadow' title='Print Bill' href='{$view}' target='_blank'><i class='fa fa-lg fa-fw fa-eye'></i></a>"
-                . "<a class='btn btn-xs btn-default text-danger mx-1 shadow' title='Delete' href='{$delete}'><i class='fa fa-lg fa-fw fa-trash'></i></a>";
+                . "<a class='btn btn-xs btn-default text-danger mx-1 shadow' title='Delete' href='{$delete}'><i class='fa fa-lg fa-fw fa-trash'></i></a>"
+                . "<a class='btn btn-xs btn-default text-warning mx-1 shadow' title='Return' href='{$return}'><i class='fa fa-lg fa-fw fa-undo' aria-hidden='true'></i></a>";
                 $result[] = $nestedData;
 
             }

@@ -29,7 +29,6 @@
                                     <tr>
                                         <th>Invoice No</th>
                                         <th>Customer</th>
-                                        <th>Hamali Charges</th>
                                         <th>Net Amount</th>
                                         <th>Transporter</th>
                                         <th>Billing Date</th>
@@ -74,7 +73,6 @@
                 "columns": [
                     { "data": "invoice_number" },
                     { "data": "customer_name" },
-                    { "data": "hamali_charges" },
                     { "data": "net_amount" },
                     { "data": "transporter" },
                     { "data": "billing_date" },

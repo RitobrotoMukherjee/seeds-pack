@@ -57,6 +57,7 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::prefix('return')->group(function () {
+        Route::get('/invoice/{billing_id}', [App\Http\Controllers\ReturnController::class, 'viewReturn'])->name('return.view');
         Route::post('invoice', [App\Http\Controllers\ReturnController::class, 'returnInvoice'])->name('return.invoice');
     });
 });
