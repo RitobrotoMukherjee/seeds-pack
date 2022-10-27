@@ -16,7 +16,7 @@
         <div class="container-fluid">
             <form role="form" id="return" method="POST" action="{{ route('return.invoice') }}" enctype="multipart/form-data">
                 @csrf
-                <input type="hidden" class="form-control" id="billing_id" name="billing_id" value="{{ $billing_deatils['id'] }}" />
+                <input type="hidden" class="form-control" id="billing_id" name="billing_id" value="{{ $billing_details['id'] }}" />
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card card-warning">
@@ -36,13 +36,19 @@
                                     </div>
                                 @endif
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="invoice_number">Invoice Number</label>
-                                            <input type="text" class="form-control" id="invoice_number" placeholder="Return Invoice" name="invoice_number" readonly value="{{ $billing_deatils['invoice_number'] }}">
+                                            <label for="invoice_number">Invoice Number (View Only)</label>
+                                            <input type="text" class="form-control" id="invoice_number" placeholder="Return Invoice" name="invoice_number" readonly value="{{ $billing_details['invoice_number'] }}">
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="invoice_amount">Return Amount (View Only)</label>
+                                            <input type="text" class="form-control" id="invoice_amount" placeholder="Return Amount" name="amount" readonly value="{{ $billing_details['net_amount'] }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="return_date">Return Date</label>
                                             <input type="text" class="form-control" id="return_date" placeholder="Return Date" name="return_date" value="{{ $today }}"  data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy-mm-dd" data-mask required>
@@ -51,7 +57,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 offset-md-3 text-center">
-                                        <button type="submit" class="btn btn-warning btn-block">Return</button>
+                                        <button type="submit" class="btn btn-lg btn-success btn-block">Return</button>
                                     </div>
                                 </div>
                             </div>
@@ -94,6 +100,9 @@
             $("#return").validate({
                 rules:{
                     "return_date":{
+                        required:true
+                    },
+                    "amount":{
                         required:true
                     }
                 }

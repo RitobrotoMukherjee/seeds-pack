@@ -44,9 +44,8 @@ class AjaxController extends Controller
                 'quantity_need' => $product['quantity'],
                 'unit_price' => $prod_details->sale_price_per_kg
             ];
-
-            $cart['net_amount'] = $prod_details->sale_price_per_kg * $product['quantity'];
         }
+        $cart['net_amount'] = $prod_details->sale_price_per_kg * $product['quantity'];
         session()->put('products', $cart);
         return $cart;
     }

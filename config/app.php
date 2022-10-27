@@ -53,10 +53,10 @@ return [
     */
 
     'url' => env('APP_URL', 'http://seeds.local'),
-    'url_prod' => env('APP_URL', 'http://seeds.identy.in'),
+    'url_prod' => env('APP_URL', 'https://seeds.identy.in'),
 
     'asset_url' => env('ASSET_URL', 'http://seeds.local/public'),
-    'asset_url_prod' => env('ASSET_URL', 'http://seeds.identy.in/public'),
+    'asset_url_prod' => env('ASSET_URL', 'https://seeds.identy.in/public'),
 
     /*
     |--------------------------------------------------------------------------

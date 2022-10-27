@@ -25,6 +25,11 @@
   <!-- all css in child views -->
 </head>
 <style>
+    input:read-only {
+        background: rgb(0, 0, 0) !important;
+        opacity: 0.5 !important;
+        border: 1px solid #87ceeb !important;
+    }
   footer {
     position: relative !important;
   }

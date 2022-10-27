@@ -25,6 +25,7 @@ class ReturnRequest extends FormRequest
     {
         return [
             'billing_id' => 'required|integer',
+            'amount' => 'required|regex:/^\d+(\.\d{1,2})?$/',
             'return_date' => 'required|date'
         ];
     }
@@ -34,8 +35,10 @@ class ReturnRequest extends FormRequest
         return [
             'billing_id.required' => 'Billing Details Not Available to Return',
             'billing_id.integer' => 'Billing data currupted, cannot return',
+            'amount.required' => 'Return amount not captured',
+            'amount.regex' => 'Return amount is not a valid price',
             'return_date.required' => 'Return Date is required',
             'return_date.date' => 'Return Date must be a valid Date'
-        ]
+        ];
     }
 }

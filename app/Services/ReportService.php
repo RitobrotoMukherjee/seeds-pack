@@ -53,7 +53,8 @@ class ReportService {
     }
     
     private function getCustomerPayment($id){
-        $customer = Customer::with(['billing', 'payment', 'latest_payment'])->find($id);
+        $customer = Customer::with(['billing.return_product', 'payment', 'latest_payment'])->find($id);
+        dd($customer);
         $result = ['customer' => null,'billing_amount' => 0, 'paid_amount' => 0, 'last_paid_at' => null, 'last_paid' => 0];
         
         $result['customer']['name'] = $customer->name;

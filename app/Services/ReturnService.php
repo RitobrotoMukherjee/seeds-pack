@@ -9,7 +9,10 @@ namespace App\Services;
  */
 
 use App\Models\Billing;
+use App\Models\ReturnProduct;
 use App\Models\Product;
+
+use Illuminate\Support\Facades\DB;
 
 class ReturnService {
     
@@ -17,8 +20,24 @@ class ReturnService {
         return Billing::select('id', 'invoice_number', 'net_amount')->find($bill_id);
     }
     
-    public function returnInvoice(array $inputs): bool {
+    public function returnInvoice(array $inputs): string {
         print_r($inputs);die();
-        return false;
+        DB::beginTransaction();
+        
+        try {
+            $rp = $this->createReturn($inputs);
+            
+        } catch (\Throwable $ex) {
+            DB::rollBack();
+            return $ex->getMessage();
+        }
+    }
+    
+    protected function createReturn(array $inputs): ?ReturnProduct {
+        return ReturnProduct::create($inputs);
+    }
+    
+    private function updateBilling(int $billing_id): ?Billing {
+        return Billing::where
     }
 }
