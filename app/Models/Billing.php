@@ -30,8 +30,4 @@ class Billing extends Model
     public function invoice_detail(){
         return $this->hasMany(InvoiceDetail::class);
     }
-
-    public function return_product() {
-        return $this->hasOne(ReturnProduct::class);
-    }
 }
